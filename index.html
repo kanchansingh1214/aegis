@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AegisBlox // Official Animation & Edits Hub</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            aegis: {
+              cyan: '#00f2fe',
+              neon: '#38bdf8',
+              purple: '#9333ea',
+              magenta: '#c084fc',
+              dark: '#080c18',
+              darker: '#04060d',
+              card: 'rgba(13, 19, 36, 0.72)'
+            }
+          },
+          boxShadow: {
+            'glow-cyan': '0 0 25px -4px rgba(0, 242, 254, 0.45)',
+            'glow-purple': '0 0 25px -4px rgba(168, 85, 247, 0.45)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #050811;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    .grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 242, 254, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 242, 254, 0.04) 1px, transparent 1px);
+    }
+
+    .glass-box {
+      background: rgba(11, 17, 33, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .glass-box-hover {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-box-hover:hover {
+      background: rgba(18, 26, 48, 0.85);
+      border-color: rgba(0, 242, 254, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px -10px rgba(0, 242, 254, 0.2);
+    }
+
+    .gradient-title {
+      background: linear-gradient(135deg, #00f2fe 0%, #60a5fa 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .avatar-border-pulse {
+      animation: avatarGlow 3.5s infinite ease-in-out;
+    }
+
+    @keyframes avatarGlow {
+      0%, 100% {
+        box-shadow: 0 0 24px -2px rgba(0, 242, 254, 0.4), inset 0 0 15px rgba(0, 242, 254, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 40px 2px rgba(147, 51, 234, 0.55), inset 0 0 20px rgba(147, 51, 234, 0.25);
+      }
+    }
+
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: #070a14; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f2fe; }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col justify-between grid-pattern selection:bg-cyan-400 selection:text-black">
+
+  <!-- Ambient Background Glows -->
+  <div class="fixed top-[-80px] left-[-80px] w-96 h-96 rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-[-100px] right-[-100px] w-[450px] h-[450px] rounded-full bg-purple-600/12 blur-[150px] pointer-events-none -z-10"></div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#050811]/85 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#home" onclick="switchTab('home')" class="flex items-center gap-3 group">
+        <div class="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-400 via-blue-500 to-purple-600 p-[1.5px] transition-transform group-hover:scale-105 shadow-glow-cyan">
+          <div class="w-full h-full bg-[#070b16] rounded-[10px] flex items-center justify-center">
+            <i class="ph-bold ph-shield-chevron text-2xl text-cyan-400"></i>
+          </div>
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-2xl tracking-wide text-white flex items-center gap-1.5">
+            AEGIS<span class="text-cyan-400 text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-800">BLOX</span>
+          </span>
+          <p class="text-[10px] text-slate-400 font-mono tracking-widest uppercase">@aegisbloxyt • Visuals</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Tabs -->
+      <nav class="hidden md:flex items-center gap-1 bg-white/5 border border-white/10 p-1.5 rounded-full">
+        <button onclick="switchTab('home')" id="tab-home" class="nav-tab px-5 py-2 rounded-full text-xs font-bold text-white bg-cyan-500/20 text-cyan-300 transition-all">
+          <i class="ph-bold ph-house mr-1"></i> Front Hub
+        </button>
+        <button onclick="switchTab('animations')" id="tab-animations" class="nav-tab px-5 py-2 rounded-full text-xs font-semibold text-slate-400 hover:text-white transition-all">
+          <i class="ph-bold ph-film-strip mr-1"></i> Animations & Edits
+        </button>
+        <button onclick="switchTab('next-steps')" id="tab-next-steps" class="nav-tab px-5 py-2 rounded-full text-xs font-semibold text-slate-400 hover:text-white transition-all">
+          <i class="ph-bold ph-compass mr-1"></i> Next Steps & Roadmap
+        </button>
+      </nav>
+
+      <!-- Action Buttons: Deploy Guide + Direct Socials -->
+      <div class="flex items-center gap-2.5">
+        <button onclick="openDeployModal()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-cyan-500 text-black hover:bg-cyan-400 transition-all shadow-glow-cyan">
+          <i class="ph-bold ph-cloud-arrow-up text-base"></i>
+          <span class="hidden sm:inline">Deploy & Share</span>
+        </button>
+
+        <a id="navYtBtn" href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" rel="noopener noreferrer" 
+           class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-red-600/20 text-red-400 border border-red-500/30 hover:bg-red-600 hover:text-white transition-all">
+          <i class="ph-fill ph-youtube-logo text-base"></i>
+          <span class="hidden lg:inline">256 Subs</span>
+        </a>
+
+        <a id="navDcBtn" href="https://discord.gg/rWGP2fRh" target="_blank" rel="noopener noreferrer" 
+           class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all">
+          <i class="ph-fill ph-discord-logo text-base"></i>
+          <span class="hidden lg:inline">Discord</span>
+        </a>
+
+        <!-- Mobile Menu Trigger -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-300 hover:text-white rounded-lg bg-white/5 border border-white/10">
+          <i class="ph-bold ph-list text-2xl"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-[#070b16]/98 px-4 pt-3 pb-5 space-y-2">
+      <button onclick="switchTab('home'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold text-cyan-300 bg-cyan-500/10 flex items-center gap-2">
+        <i class="ph-bold ph-house"></i> Front Hub
+      </button>
+      <button onclick="switchTab('animations'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2">
+        <i class="ph-bold ph-film-strip"></i> Animations & Edits
+      </button>
+      <button onclick="switchTab('next-steps'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2">
+        <i class="ph-bold ph-compass"></i> Next Steps & Roadmap
+      </button>
+      <button onclick="openDeployModal(); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-bold text-black bg-cyan-400 flex items-center gap-2">
+        <i class="ph-bold ph-cloud-arrow-up"></i> Deploy Free Live Link
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+    
+    <!-- ================= PAGE 1: FRONT HUB & HERO SECTION ================= -->
+    <section id="section-home" class="page-section space-y-12">
+      
+      <!-- Hero Banner -->
+      <div class="relative overflow-hidden rounded-3xl glass-box p-6 sm:p-10 lg:p-12 border border-white/15">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Creator Front Picture with Drag & Drop and Instant Upload -->
+          <div class="lg:col-span-5 flex flex-col items-center">
+            <div class="relative group cursor-pointer" onclick="document.getElementById('avatarFileInput').click()" title="Click to upload your front picture">
+              <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-3xl p-1.5 bg-gradient-to-tr from-cyan-400 via-blue-500 to-purple-600 avatar-border-pulse transition-transform duration-300 group-hover:scale-102">
+                <div class="w-full h-full rounded-[22px] overflow-hidden bg-slate-950 relative flex items-center justify-center">
+                  
+                  <!-- Creator Front Image (Local Storage Driven) -->
+                  <img id="creatorPhoto" 
+                       src="./advik_profile_roblox.jpeg" 
+                       alt="AegisBlox Profile Picture" 
+                       class="w-full h-full object-cover object-center transition-all duration-300 group-hover:opacity-80"
+                       onerror="this.src='https://placehold.co/600x600/080c18/00f2fe?text=AegisBlox+Photo';"
+                  />
+
+                  <!-- Upload Overlay Hover Prompt -->
+                  <div class="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center backdrop-blur-xs" style="display: none";>
+                    <div class="w-12 h-12 rounded-full bg-cyan-500/30 border border-cyan-400 flex items-center justify-center text-cyan-300 mb-2">
+                      <i class="ph-bold ph-camera text-2xl"></i>
+                    </div>
+                    <p class="text-xs font-bold text-white">Upload Front Picture</p>
+                    <p class="text-[10px] text-cyan-300 mt-0.5">Click or drag & drop (Persists automatically)</p>
+                  </div>
+
+                  <!-- Verified Creator Badge -->
+                  <div class="absolute bottom-3 left-3 bg-[#060a16]/95 border border-cyan-500/40 text-[11px] font-mono text-cyan-300 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span>AEGIS // CREATOR</span>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Hidden Native Input -->
+              <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
+            </div>
+
+            <!-- Controls for Photo -->
+            <div class="mt-4 flex items-center gap-2" style="display:none">
+              <button onclick="document.getElementById('avatarFileInput').click()" class="text-xs text-slate-200 hover:text-cyan-300 bg-white/5 border border-white/10 hover:border-cyan-500/40 px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors font-medium">
+                <i class="ph-bold ph-upload-simple text-cyan-400"></i> Change Photo
+              </button>
+              <button onclick="resetDefaultPhoto()" class="text-xs text-slate-400 hover:text-red-300 bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-xl transition-colors" title="Reset image">
+                <i class="ph-bold ph-arrow-counter-clockwise"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Branding & Information -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
+              <i class="ph-bold ph-lightning"></i> Roblox Animator & Sakuga Video Editor
+            </div>
+
+            <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight">
+              Yo, I'm <span class="gradient-title">AEGIS</span>.
+              <span class="block text-2xl sm:text-3xl lg:text-4xl text-slate-200 mt-2 font-semibold">
+                Roblox Rivals, JJK & 3D Anime Edits.
+              </span>
+            </h1>
+
+            <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+              Official portfolio for <span class="text-cyan-400 font-semibold font-mono">@aegisbloxyt</span>. Watch high-speed montages, join the private Discord server to give feedback, and track future animation projects in development.
+            </p>
+
+            <!-- Prominent Action Buttons (Configured with Exact Links) -->
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <!-- Official YouTube Link -->
+              <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" rel="noopener noreferrer" 
+                 class="w-full sm:w-auto flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold text-base shadow-lg shadow-red-600/30 transition-all transform hover:-translate-y-0.5">
+                <i class="ph-fill ph-youtube-logo text-3xl"></i>
+                <div class="text-left">
+                  <div class="text-[11px] opacity-80 uppercase tracking-wider font-mono">YouTube • @aegisbloxyt</div>
+                  <div class="font-display text-lg">Visit YouTube Channel</div>
+                </div>
+                <i class="ph-bold ph-arrow-up-right ml-1"></i>
+              </a>
+
+              <!-- Official Discord Server Link -->
+              <a href="https://discord.gg/rWGP2fRh" target="_blank" rel="noopener noreferrer" 
+                 class="w-full sm:w-auto flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-gradient-to-r from-[#5865F2] to-[#4752c4] hover:from-[#6773f5] hover:to-[#5865F2] text-white font-bold text-base shadow-lg shadow-indigo-600/30 transition-all transform hover:-translate-y-0.5">
+                <i class="ph-fill ph-discord-logo text-3xl"></i>
+                <div class="text-left">
+                  <div class="text-[11px] opacity-80 uppercase tracking-wider font-mono">Aegis Community</div>
+                  <div class="font-display text-lg">Join Discord Server</div>
+                </div>
+                <i class="ph-bold ph-arrow-up-right ml-1"></i>
+              </a>
+            </div>
+
+            <!-- Stats Counters with Edit Modal Option -->
+            <div class="pt-5 border-t border-white/10 flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-10">
+              <div class="text-center lg:text-left">
+                <div class="flex items-center gap-1.5 justify-center lg:justify-start">
+                  <span id="statSubscribers" class="font-display text-3xl font-extrabold text-white">256</span>
+                  <button onclick="quickEditStats()" title="Update subscriber count" class="text-slate-500 hover:text-cyan-400 text-xs">
+                    <i class="ph-bold ph-pencil-simple"></i>
+                  </button>
+                </div>
+                <p class="text-xs text-slate-400 font-mono">YouTube Subscribers</p>
+              </div>
+
+              <div class="text-center lg:text-left">
+                <span id="statEdits" class="font-display text-3xl font-extrabold text-cyan-400">14+</span>
+                <p class="text-xs text-slate-400 font-mono">Animations & Edits</p>
+              </div>
+
+              <div class="text-center lg:text-left">
+                <span id="statCommunity" class="font-display text-3xl font-extrabold text-purple-400">Online</span>
+                <p class="text-xs text-slate-400 font-mono">Discord Tribe</p>
+              </div>
+
+              <div class="text-center lg:text-left">
+                <span class="font-display text-3xl font-extrabold text-emerald-400">Active</span>
+                <p class="text-xs text-slate-400 font-mono">Roblox Rivals Clan</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Feature Highlights -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass-box p-6 rounded-2xl glass-box-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center mb-4">
+              <i class="ph-bold ph-sword text-2xl"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white mb-2">Roblox Rivals Choreography</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Fast-paced combat montages synced with Brazilian Phonk, high frame-rate velocity, and motion blur.</p>
+          </div>
+          <button onclick="switchTab('animations')" class="mt-4 inline-flex items-center gap-1.5 text-xs text-cyan-400 font-bold hover:underline">
+            View All Edits <i class="ph-bold ph-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="glass-box p-6 rounded-2xl glass-box-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center mb-4">
+              <i class="ph-bold ph-sparkle text-2xl"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white mb-2">Anime & JJK Effects</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Gojo Domain Expansions, Hollow Purple particle VFX, and experimental 3D camera projection tracks.</p>
+          </div>
+          <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="mt-4 inline-flex items-center gap-1.5 text-xs text-purple-400 font-bold hover:underline">
+            Watch on YouTube <i class="ph-bold ph-arrow-up-right"></i>
+          </a>
+        </div>
+
+        <div class="glass-box p-6 rounded-2xl glass-box-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center mb-4">
+              <i class="ph-bold ph-chats-teardrop text-2xl"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white mb-2">Discord Animation Lounge</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Direct sneak-peeks, project clips, preset packs, and community game sessions with Aegis.</p>
+          </div>
+          <a href="https://discord.gg/rWGP2fRh" target="_blank" class="mt-4 inline-flex items-center gap-1.5 text-xs text-indigo-400 font-bold hover:underline">
+            Enter Discord <i class="ph-bold ph-arrow-up-right"></i>
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= PAGE 2: ANIMATIONS & EDITS GALLERY ================= -->
+    <section id="section-animations" class="page-section hidden space-y-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-xs font-mono mb-2">
+            <i class="ph-bold ph-film-strip"></i> Real Channel Releases
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Animations & Video Edits</h2>
+          <p class="text-slate-400 text-sm mt-1">Directly curated from AegisBlox's uploads and upcoming cuts.</p>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-2xl border border-white/10 text-xs">
+          <button onclick="filterGallery('all')" class="gallery-filter px-3.5 py-1.5 rounded-xl bg-cyan-400 text-black font-bold" data-filter="all">All</button>
+          <button onclick="filterGallery('jjk')" class="gallery-filter px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white" data-filter="jjk">JJK & Anime</button>
+          <button onclick="filterGallery('rivals')" class="gallery-filter px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white" data-filter="rivals">Roblox Rivals</button>
+          <button onclick="filterGallery('lore')" class="gallery-filter px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white" data-filter="lore">Backrooms & Lore</button>
+        </div>
+      </div>
+
+      <!-- Video Grid -->
+      <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Video 1: Hollow Purple JJK -->
+        <div class="video-item glass-box rounded-2xl overflow-hidden border border-white/10 glass-box-hover flex flex-col" data-cat="jjk">
+          <div class="relative group cursor-pointer" onclick="openChannelVideo('Hollow Purple Edit / JJK')">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=700&q=80" alt="Hollow Purple Edit" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center">
+              <div class="w-13 h-13 rounded-full bg-cyan-400 text-black p-3.5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-play text-2xl ml-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-3 left-3 bg-purple-600 text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase">JJK Special</span>
+            <span class="absolute bottom-3 right-3 bg-black/80 text-cyan-300 text-[11px] font-mono px-2 py-0.5 rounded">HD 60FPS</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-400">Hollow Purple Edit // JJK</h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">High energy particle build-up, imaginary technique blast, and sound design overhaul.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-slate-400"><i class="ph-bold ph-flame text-red-400"></i> YouTube Edit</span>
+              <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="text-cyan-400 font-bold hover:underline flex items-center gap-1">
+                Watch <i class="ph-bold ph-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 2: Montagem Universo - Rivals Edit -->
+        <div class="video-item glass-box rounded-2xl overflow-hidden border border-white/10 glass-box-hover flex flex-col" data-cat="rivals">
+          <div class="relative group cursor-pointer" onclick="openChannelVideo('Montagem Universo - Roblox Rivals Edit')">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=700&q=80" alt="Montagem Universo" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center">
+              <div class="w-13 h-13 rounded-full bg-cyan-400 text-black p-3.5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-play text-2xl ml-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-3 left-3 bg-cyan-500 text-black text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase">Roblox Rivals</span>
+            <span class="absolute bottom-3 right-3 bg-black/80 text-cyan-300 text-[11px] font-mono px-2 py-0.5 rounded">Velocity Sync</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Montagem Universo // Rivals Edit</h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">Crisp snipes, sync curves, and cinematic shake effects synced to Brazilian Phonk.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-slate-400"><i class="ph-bold ph-trophy text-amber-400"></i> Top Montage</span>
+              <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="text-cyan-400 font-bold hover:underline flex items-center gap-1">
+                Watch <i class="ph-bold ph-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 3: Tough Montagem Uranium Gojo Edit -->
+        <div class="video-item glass-box rounded-2xl overflow-hidden border border-white/10 glass-box-hover flex flex-col" data-cat="jjk">
+          <div class="relative group cursor-pointer" onclick="openChannelVideo('Tough Montagem Uranium Gojo Edit')">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80" alt="Uranium Gojo Edit" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center">
+              <div class="w-13 h-13 rounded-full bg-cyan-400 text-black p-3.5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-play text-2xl ml-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-3 left-3 bg-emerald-500 text-black text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase">Phonk Gojo</span>
+            <span class="absolute bottom-3 right-3 bg-black/80 text-cyan-300 text-[11px] font-mono px-2 py-0.5 rounded">CC Glow</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Tough Montagem Uranium Gojo Edit</h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">Satoru Gojo unlimited void domain sequences stylized with fluorescent green-cyan grading.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-slate-400"><i class="ph-bold ph-lightning text-cyan-400"></i> Trending</span>
+              <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="text-cyan-400 font-bold hover:underline flex items-center gap-1">
+                Watch <i class="ph-bold ph-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 4: Joining the Backrooms -->
+        <div class="video-item glass-box rounded-2xl overflow-hidden border border-white/10 glass-box-hover flex flex-col" data-cat="lore">
+          <div class="relative group cursor-pointer" onclick="openChannelVideo('Joining the Backrooms Edit')">
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=700&q=80" alt="Backrooms Edit" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center">
+              <div class="w-13 h-13 rounded-full bg-cyan-400 text-black p-3.5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-play text-2xl ml-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-3 left-3 bg-amber-500 text-black text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase">Atmospheric</span>
+            <span class="absolute bottom-3 right-3 bg-black/80 text-cyan-300 text-[11px] font-mono px-2 py-0.5 rounded">VHS Glitch</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Joining the Backrooms Edit</h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">Liminal space camera transitions, analog VHS artifacts, and eerie no-clip sequence.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-slate-400"><i class="ph-bold ph-video-camera text-slate-400"></i> Story Edit</span>
+              <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="text-cyan-400 font-bold hover:underline flex items-center gap-1">
+                Watch <i class="ph-bold ph-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 5: Ransom Rivals Animation -->
+        <div class="video-item glass-box rounded-2xl overflow-hidden border border-white/10 glass-box-hover flex flex-col" data-cat="rivals">
+          <div class="relative group cursor-pointer" onclick="openChannelVideo('Ransom Rivals Animation Edit')">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80" alt="Ransom Rivals" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center">
+              <div class="w-13 h-13 rounded-full bg-cyan-400 text-black p-3.5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-play text-2xl ml-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-3 left-3 bg-cyan-500 text-black text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase">Rivals Beat</span>
+            <span class="absolute bottom-3 right-3 bg-black/80 text-cyan-300 text-[11px] font-mono px-2 py-0.5 rounded">Impact Sync</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Ransom Rivals Animation Edit</h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">High sensitivity tracking, bullet time freeze frame, and chromatic split cuts.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-slate-400"><i class="ph-bold ph-fire text-red-400"></i> Combat Cut</span>
+              <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="text-cyan-400 font-bold hover:underline flex items-center gap-1">
+                Watch <i class="ph-bold ph-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 6: Reborn as a Swordsman -->
+        <div class="video-item glass-box rounded-2xl overflow-hidden border border-white/10 glass-box-hover flex flex-col" data-cat="jjk">
+          <div class="relative group cursor-pointer" onclick="openChannelVideo('Reborn as a Swordsman Animation Edit')">
+            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=700&q=80" alt="Swordsman Animation" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center">
+              <div class="w-13 h-13 rounded-full bg-cyan-400 text-black p-3.5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <i class="ph-fill ph-play text-2xl ml-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-3 left-3 bg-rose-500 text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase">Katana Action</span>
+            <span class="absolute bottom-3 right-3 bg-black/80 text-cyan-300 text-[11px] font-mono px-2 py-0.5 rounded">Custom Audio</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Reborn as a Swordsman</h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">Original sword slash transitions with custom speed ramp keyframing and anime sparks.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-slate-400"><i class="ph-bold ph-sparkle text-purple-400"></i> Animation</span>
+              <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="text-cyan-400 font-bold hover:underline flex items-center gap-1">
+                Watch <i class="ph-bold ph-arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= PAGE 3: NEXT STEPS & ANIMATIONS ROADMAP ================= -->
+    <section id="section-next-steps" class="page-section hidden space-y-10">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 text-xs font-mono mb-2">
+            <i class="ph-bold ph-rocket-launch"></i> Production Pipeline
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Animations Next Steps</h2>
+          <p class="text-slate-400 text-sm mt-1 max-w-xl">
+            Live tracker of the projects being animated right now. Cast your vote to tell Aegis which project to drop first!
+          </p>
+        </div>
+
+        <!-- Add Next Step button -->
+        <button onclick="openAddProjectModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-white/5 border border-white/15 hover:border-cyan-400 text-white hover:text-cyan-300 transition-colors">
+          <i class="ph-bold ph-plus-circle text-base text-cyan-400"></i> Add Project Goal
+        </button>
+      </div>
+
+      <!-- Live Pipeline Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="projectsContainer">
+        
+        <!-- Project 1 -->
+        <div class="glass-box p-6 rounded-2xl border border-cyan-500/30 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">RENDERING 85%</span>
+              <span class="text-xs text-slate-400 font-mono">PRIORITY #1</span>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white">Roblox Rivals: Void Clash Part 2</h3>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Sequel to our biggest montage. Features 120fps camera sweeps, custom particle shaders, and a 2-minute 1v1 duel sequence.
+            </p>
+
+            <!-- Progress Bar -->
+            <div class="mt-5">
+              <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                <span>Rendering Stage</span>
+                <span class="text-cyan-400 font-bold">85%</span>
+              </div>
+              <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-white/10">
+                <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full rounded-full transition-all duration-700" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+            <button onclick="upvoteProject(this, 1)" class="upvote-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400 text-xs font-medium text-slate-200">
+              <i class="ph-bold ph-thumbs-up text-cyan-400"></i> Upvote (<span class="vote-num">142</span>)
+            </button>
+            <span class="text-[11px] text-cyan-400 font-mono">Drops this month</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-box p-6 rounded-2xl border border-purple-500/30 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800">INBETWEENING 50%</span>
+              <span class="text-xs text-slate-400 font-mono">PRIORITY #2</span>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white">JJK 3D Domain Expansion Sakuga Cut</h3>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Fully hand-timed 24fps keyframes of Gojo vs Sukuna domain clash with stylized cel shading and explosive bass drops.
+            </p>
+
+            <!-- Progress Bar -->
+            <div class="mt-5">
+              <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                <span>Keyframing & Cleanups</span>
+                <span class="text-purple-400 font-bold">50%</span>
+              </div>
+              <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-white/10">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full transition-all duration-700" style="width: 50%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+            <button onclick="upvoteProject(this, 2)" class="upvote-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-purple-400 text-xs font-medium text-slate-200">
+              <i class="ph-bold ph-thumbs-up text-purple-400"></i> Upvote (<span class="vote-num">98</span>)
+            </button>
+            <span class="text-[11px] text-purple-400 font-mono">Next up</span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass-box p-6 rounded-2xl border border-indigo-500/30 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">STORYBOARDING 25%</span>
+              <span class="text-xs text-slate-400 font-mono">PRIORITY #3</span>
+            </div>
+            <h3 class="font-display font-bold text-xl text-white">Community Discord Collab Animation</h3>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Featuring avatars from members of our Discord server in a multi-player arena tournament animation.
+            </p>
+
+            <!-- Progress Bar -->
+            <div class="mt-5">
+              <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                <span>Storyboarding & Audio Mix</span>
+                <span class="text-indigo-400 font-bold">25%</span>
+              </div>
+              <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-white/10">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full transition-all duration-700" style="width: 25%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+            <button onclick="upvoteProject(this, 3)" class="upvote-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-indigo-400 text-xs font-medium text-slate-200">
+              <i class="ph-bold ph-thumbs-up text-indigo-400"></i> Upvote (<span class="vote-num">76</span>)
+            </button>
+            <span class="text-[11px] text-indigo-400 font-mono">Discord Exclusive</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Roadmap Timeline Details -->
+      <div class="glass-box p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+        <h3 class="font-display font-bold text-xl text-white flex items-center gap-2">
+          <i class="ph-bold ph-flag-checkered text-cyan-400"></i> Aegis Growth & Production Milestones
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-emerald-500/40">
+            <span class="text-emerald-400 font-bold flex items-center gap-1"><i class="ph-bold ph-check"></i> MILESTONE 1</span>
+            <p class="text-white font-display text-sm font-semibold mt-1">256 Subscribers Reached</p>
+            <p class="text-slate-400 text-[11px] mt-1 font-sans">First wave of loyal subscribers on YouTube with active montage views.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-500/40">
+            <span class="text-cyan-400 font-bold flex items-center gap-1"><i class="ph-bold ph-spinner animate-spin"></i> MILESTONE 2 (TARGET)</span>
+            <p class="text-white font-display text-sm font-semibold mt-1">500 Subscribers Goal</p>
+            <p class="text-slate-400 text-[11px] mt-1 font-sans">Release of the full 3D Sakuga Short & exclusive Aegis editing pack on Discord.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-purple-500/30">
+            <span class="text-purple-400 font-bold flex items-center gap-1"><i class="ph-bold ph-sparkle"></i> MILESTONE 3</span>
+            <p class="text-white font-display text-sm font-semibold mt-1">1,000 Subscribers & Partner</p>
+            <p class="text-slate-400 text-[11px] mt-1 font-sans">YouTube monetization unlocked, community membership badges, and live streams.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10">
+            <span class="text-slate-400 font-bold flex items-center gap-1"><i class="ph-bold ph-trophy"></i> MILESTONE 4</span>
+            <p class="text-white font-display text-sm font-semibold mt-1">Full Animated Series</p>
+            <p class="text-slate-400 text-[11px] mt-1 font-sans">Original multi-episode story with custom character models, lore, and voice cast.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= DEPLOY & SHARE HUB MODAL ================= -->
+  <div id="deployModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-box w-full max-w-2xl rounded-3xl p-6 sm:p-8 border border-cyan-400/50 bg-[#070b16] shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div>
+          <h3 class="font-display font-bold text-xl text-white flex items-center gap-2">
+            <i class="ph-bold ph-cloud-arrow-up text-cyan-400"></i> Deploy Website & Get Your Live Link
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">How to host this file for free in under 60 seconds with a permanent URL to share on YouTube & Discord.</p>
+        </div>
+        <button onclick="closeDeployModal()" class="text-slate-400 hover:text-white p-1">
+          <i class="ph-bold ph-x text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Quick Action: Download index.html + Copy Page Link -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <button onclick="downloadHtmlFile()" class="p-3.5 rounded-2xl bg-cyan-400 text-black font-bold text-xs flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-glow-cyan">
+          <i class="ph-bold ph-download-simple text-lg"></i>
+          <span>1. Download index.html</span>
+        </button>
+        <button onclick="copyShareLink()" class="p-3.5 rounded-2xl bg-white/5 border border-white/15 text-white font-bold text-xs flex items-center justify-center gap-2 hover:bg-white/10 transition-all">
+          <i class="ph-bold ph-share-network text-lg text-cyan-400"></i>
+          <span>Share Current URL</span>
+        </button>
+      </div>
+
+      <!-- 3 Fastest Free Hosting Services -->
+      <div class="space-y-4">
+        <p class="text-xs font-mono uppercase text-cyan-400 tracking-wider">Fastest 100% Free Hosting Methods:</p>
+
+        <!-- Method A: Netlify Drop -->
+        <div class="p-4 rounded-2xl bg-slate-900/90 border border-cyan-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-sm flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-cyan-500 text-black text-xs flex items-center justify-center font-mono">A</span>
+              Netlify Drop (Easiest - No Login Needed)
+            </span>
+            <span class="text-[11px] text-emerald-400 font-mono">Takes 30 seconds</span>
+          </div>
+          <ol class="text-xs text-slate-300 list-decimal list-inside space-y-1">
+            <li>Click the cyan <strong>"Download index.html"</strong> button above.</li>
+            <li>Visit <a href="https://app.netlify.com/drop" target="_blank" class="text-cyan-400 underline font-semibold">app.netlify.com/drop</a> in your browser.</li>
+            <li>Drag & drop the downloaded <code class="bg-black/60 px-1 py-0.5 rounded text-cyan-300">index.html</code> directly into the Netlify box.</li>
+            <li>You will instantly get a live link like <code class="bg-black/60 px-1 py-0.5 rounded text-cyan-300">https://aegis-blox.netlify.app</code> to paste into your YouTube description!</li>
+          </ol>
+        </div>
+
+        <!-- Method B: GitHub Pages -->
+        <div class="p-4 rounded-2xl bg-slate-900/90 border border-white/10 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-sm flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-purple-500 text-white text-xs flex items-center justify-center font-mono">B</span>
+              GitHub Pages (Permanent Custom Domain)
+            </span>
+            <span class="text-[11px] text-purple-400 font-mono">Free Forever</span>
+          </div>
+          <p class="text-xs text-slate-300">
+            Create a GitHub repository named <code class="bg-black/60 px-1 py-0.5 rounded text-purple-300">aegis-portfolio</code>, upload <code class="bg-black/60 px-1 py-0.5 rounded text-purple-300">index.html</code>, and enable Pages in <strong>Settings → Pages</strong> to get <code class="bg-black/60 px-1 py-0.5 rounded text-purple-300">username.github.io/aegis-portfolio</code>.
+          </p>
+        </div>
+
+        <!-- Method C: Vercel -->
+        <div class="p-4 rounded-2xl bg-slate-900/90 border border-white/10 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-sm flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-indigo-500 text-white text-xs flex items-center justify-center font-mono">C</span>
+              Vercel Deployment
+            </span>
+            <span class="text-[11px] text-indigo-300 font-mono">Ultra Fast CDN</span>
+          </div>
+          <p class="text-xs text-slate-300">
+            Go to <a href="https://vercel.com" target="_blank" class="text-indigo-400 underline font-semibold">vercel.com</a>, import your project folder or GitHub repository, and click Deploy.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="flex items-center justify-end pt-2 border-t border-white/10">
+        <button onclick="closeDeployModal()" class="px-5 py-2 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white">
+          Close Guide
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Quick Edit Stats Modal -->
+  <div id="statsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-box w-full max-w-sm rounded-2xl p-6 border border-cyan-400/40 bg-[#090e1f] space-y-4">
+      <div class="flex items-center justify-between">
+        <h4 class="font-display font-bold text-white text-base">Update Subscribers</h4>
+        <button onclick="closeStatsModal()" class="text-slate-400 hover:text-white"><i class="ph-bold ph-x text-lg"></i></button>
+      </div>
+      <div>
+        <label class="block text-xs font-mono text-slate-300 mb-1">Current Subscribers (YouTube):</label>
+        <input type="number" id="subInput" value="256" class="w-full px-3 py-2 bg-slate-950 border border-white/20 rounded-xl text-white font-mono text-sm focus:outline-none focus:border-cyan-400">
+      </div>
+      <div class="flex justify-end gap-2">
+        <button onclick="closeStatsModal()" class="px-3 py-1.5 rounded-lg text-xs text-slate-400 hover:text-white">Cancel</button>
+        <button onclick="saveStats()" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-cyan-400 text-black hover:bg-cyan-300">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Next Step Project Modal -->
+  <div id="addProjectModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-box w-full max-w-md rounded-2xl p-6 border border-purple-400/40 bg-[#090e1f] space-y-4">
+      <div class="flex items-center justify-between">
+        <h4 class="font-display font-bold text-white text-base">Add New Animation Goal</h4>
+        <button onclick="closeAddProjectModal()" class="text-slate-400 hover:text-white"><i class="ph-bold ph-x text-lg"></i></button>
+      </div>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Project Title:</label>
+          <input type="text" id="newProjTitle" placeholder="e.g. Rivals Clan War Montage" class="w-full px-3 py-2 bg-slate-950 border border-white/20 rounded-xl text-white text-xs focus:outline-none focus:border-purple-400">
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Description:</label>
+          <input type="text" id="newProjDesc" placeholder="Short description of the edit or animation..." class="w-full px-3 py-2 bg-slate-950 border border-white/20 rounded-xl text-white text-xs focus:outline-none focus:border-purple-400">
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Progress Percentage (%):</label>
+          <input type="number" id="newProjProgress" value="20" min="0" max="100" class="w-full px-3 py-2 bg-slate-950 border border-white/20 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-purple-400">
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeAddProjectModal()" class="px-3 py-1.5 rounded-lg text-xs text-slate-400 hover:text-white">Cancel</button>
+        <button onclick="submitNewProject()" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-purple-500 text-white hover:bg-purple-400">Add Goal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-white/10 bg-[#03050c] py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <div class="flex items-center gap-2">
+        <i class="ph-bold ph-shield-check text-cyan-400 text-base"></i>
+        <span>© 2026 <strong>AEGISBLOX</strong> (@aegisbloxyt). All animations and edits curated for YouTube & Discord.</span>
+      </div>
+      <div class="flex items-center gap-5">
+        <a href="https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus" target="_blank" class="hover:text-red-400 transition-colors flex items-center gap-1 font-semibold">
+          <i class="ph-fill ph-youtube-logo text-base"></i> YouTube (256 Subs)
+        </a>
+        <a href="https://discord.gg/rWGP2fRh" target="_blank" class="hover:text-indigo-400 transition-colors flex items-center gap-1 font-semibold">
+          <i class="ph-fill ph-discord-logo text-base"></i> Discord Server
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab controller
+    function switchTab(tabId) {
+      const tabs = ['home', 'animations', 'next-steps'];
+      tabs.forEach(id => {
+        const sec = document.getElementById(`section-${id}`);
+        const btn = document.getElementById(`tab-${id}`);
+        if (id === tabId) {
+          sec.classList.remove('hidden');
+          if (btn) {
+            btn.classList.add('bg-cyan-500/20', 'text-cyan-300');
+            btn.classList.remove('text-slate-400');
+          }
+        } else {
+          sec.classList.add('hidden');
+          if (btn) {
+            btn.classList.remove('bg-cyan-500/20', 'text-cyan-300');
+            btn.classList.add('text-slate-400');
+          }
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    // Photo Upload with localStorage Persistence
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        if (!file.type.startsWith('image/')) {
+          showToast('Please select a valid image file.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Data = e.target.result;
+          document.getElementById('creatorPhoto').src = base64Data;
+          try {
+            localStorage.setItem('aegis_creator_photo', base64Data);
+            showToast('Front picture saved permanently!');
+          } catch(err) {
+            showToast('Picture updated! (Local cache full, but active on screen)');
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function resetDefaultPhoto() {
+      const defaultImg = "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=700&q=80";
+      document.getElementById('creatorPhoto').src = defaultImg;
+      localStorage.removeItem('aegis_creator_photo');
+      showToast('Restored default theme portrait.');
+    }
+
+    // Drag and drop photo logic
+    const dropZone = document.getElementById('creatorPhoto').parentElement;
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evt => {
+      dropZone.addEventListener(evt, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+    });
+    dropZone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files && files.length > 0) {
+        handlePhotoUpload({ target: { files: files } });
+      }
+    });
+
+    // Gallery Filtering
+    function filterGallery(category) {
+      const buttons = document.querySelectorAll('.gallery-filter');
+      buttons.forEach(btn => {
+        if (btn.dataset.filter === category) {
+          btn.classList.add('bg-cyan-400', 'text-black', 'font-bold');
+          btn.classList.remove('text-slate-400');
+        } else {
+          btn.classList.remove('bg-cyan-400', 'text-black', 'font-bold');
+          btn.classList.add('text-slate-400');
+        }
+      });
+
+      const cards = document.querySelectorAll('.video-item');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.cat === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openChannelVideo(title) {
+      showToast(`Opening YouTube: "${title}"`);
+      setTimeout(() => {
+        window.open('https://youtube.com/@aegisbloxyt?si=sSsNfU1URkWrPxus', '_blank');
+      }, 500);
+    }
+
+    // Quick Edit Stats Modal
+    function quickEditStats() {
+      document.getElementById('statsModal').classList.remove('hidden');
+    }
+    function closeStatsModal() {
+      document.getElementById('statsModal').classList.add('hidden');
+    }
+    function saveStats() {
+      const val = document.getElementById('subInput').value;
+      if (val) {
+        document.getElementById('statSubscribers').innerText = val;
+        localStorage.setItem('aegis_subs_count', val);
+        showToast(`Subscribers updated to ${val}!`);
+      }
+      closeStatsModal();
+    }
+
+    // Upvote Project in Roadmap
+    function upvoteProject(btn, id) {
+      const countSpan = btn.querySelector('.vote-num');
+      let currentVotes = parseInt(countSpan.innerText) || 0;
+      countSpan.innerText = currentVotes + 1;
+      btn.classList.add('border-cyan-400', 'bg-cyan-950/40');
+      btn.disabled = true;
+      showToast('Upvote submitted! Thank you for the feedback.');
+    }
+
+    // Add Project Modal & Creator Pipeline
+    function openAddProjectModal() {
+      document.getElementById('addProjectModal').classList.remove('hidden');
+    }
+    function closeAddProjectModal() {
+      document.getElementById('addProjectModal').classList.add('hidden');
+    }
+    function submitNewProject() {
+      const title = document.getElementById('newProjTitle').value.trim();
+      const desc = document.getElementById('newProjDesc').value.trim();
+      const progress = document.getElementById('newProjProgress').value || 10;
+
+      if (!title) {
+        showToast('Please enter a project title');
+        return;
+      }
+
+      const container = document.getElementById('projectsContainer');
+      const newCard = document.createElement('div');
+      newCard.className = 'glass-box p-6 rounded-2xl border border-white/20 flex flex-col justify-between relative overflow-hidden';
+      newCard.innerHTML = `
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-slate-900 text-cyan-300 border border-cyan-800">PIPELINE ${progress}%</span>
+            <span class="text-xs text-slate-400 font-mono">NEW</span>
+          </div>
+          <h3 class="font-display font-bold text-xl text-white">${title}</h3>
+          <p class="text-slate-300 text-xs mt-2 leading-relaxed">${desc || 'In active production by Aegis.'}</p>
+          <div class="mt-5">
+            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+              <span>Production Stage</span>
+              <span class="text-cyan-400 font-bold">${progress}%</span>
+            </div>
+            <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-white/10">
+              <div class="bg-gradient-to-r from-cyan-400 to-purple-500 h-full rounded-full" style="width: ${progress}%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+          <button onclick="upvoteProject(this, 99)" class="upvote-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400 text-xs font-medium text-slate-200">
+            <i class="ph-bold ph-thumbs-up text-cyan-400"></i> Upvote (<span class="vote-num">1</span>)
+          </button>
+          <span class="text-[11px] text-cyan-400 font-mono">Added by Aegis</span>
+        </div>
+      `;
+      container.appendChild(newCard);
+      closeAddProjectModal();
+      showToast(`Added "${title}" to Next Steps roadmap!`);
+    }
+
+    // Deploy Guide Modal & Download Logic
+    function openDeployModal() {
+      document.getElementById('deployModal').classList.remove('hidden');
+    }
+    function closeDeployModal() {
+      document.getElementById('deployModal').classList.add('hidden');
+    }
+
+    // Download standalone index.html so users can drag & drop into Netlify or Vercel
+    function downloadHtmlFile() {
+      const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+      showToast('index.html downloaded! Now drop it into Netlify Drop.');
+    }
+
+    // Web Share API & Clipboard fallback
+    function copyShareLink() {
+      const shareUrl = window.location.href;
+      if (navigator.share) {
+        navigator.share({
+          title: 'AegisBlox // Creator & Animation Hub',
+          url: shareUrl
+        }).catch(() => fallbackCopy(shareUrl));
+      } else {
+        fallbackCopy(shareUrl);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast('Link copied to clipboard!');
+      } catch (e) {
+        showToast('Please copy the URL from your address bar.');
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    // Notification Toast Helper
+    function showToast(message) {
+      let toast = document.getElementById('globalToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'globalToast';
+        toast.className = 'fixed bottom-6 right-6 z-50 bg-[#0b1022] border border-cyan-400 text-white text-xs px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 transition-all transform duration-300';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<i class="ph-bold ph-shield-check text-cyan-400 text-base"></i> <span>${message}</span>`;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(12px)';
+      }, 3500);
+    }
+
+    // Initialize saved data on page load
+    window.onload = function() {
+      // Restore photo if saved
+      const savedPhoto = localStorage.getItem('aegis_creator_photo');
+      if (savedPhoto) {
+        document.getElementById('creatorPhoto').src = savedPhoto;
+      }
+      // Restore subscribers count if modified
+      const savedSubs = localStorage.getItem('aegis_subs_count');
+      if (savedSubs) {
+        document.getElementById('statSubscribers').innerText = savedSubs;
+        document.getElementById('subInput').value = savedSubs;
+      }
+    };
+  </script>
+</body>
+</html>
